@@ -8,19 +8,34 @@ namespace Parser
 {
     public class VotePageParser
     {
-        public IEnumerable<Deputy> ParseDeputy(string html)
-        {
-            HtmlDocument document = new HtmlDocument();
-            document.LoadHtml(html);
 
-            if (document.ParseErrors != null && document.ParseErrors.Count() > 0)
-            {
-                throw new ArgumentException("Incorrect html");
-            }
+        // Should be deleted
+        //public IEnumerable<Deputy> ParseDeputy(string html)
+        //{
+        //    HtmlDocument document = new HtmlDocument();
+        //    document.LoadHtml(html);
 
+        //    if (document.ParseErrors != null && document.ParseErrors.Count() > 0)
+        //    {
+        //        //throw new ArgumentException("Incorrect html");
+        //    }
 
-            throw new NotImplementedException();
-        }
+        //    HashSet<Deputy> deputats = new HashSet<Deputy>();
+
+        //    var dic = new Dictionary<string, int>();
+        //    foreach (HtmlNode div in document.DocumentNode.SelectNodes("//div[contains(@class,'dep')]"))
+        //    {
+        //        deputats.Add(new Deputy { FullName = div.InnerText });
+        //        if (dic.ContainsKey(div.InnerText))
+        //            dic[div.InnerText]++;
+        //        else
+        //            dic[div.InnerText] = 1;
+        //    }
+        //    var newDic = dic.OrderByDescending(x => x.Value).ToArray();
+
+        //    var res = deputats.ToArray();
+        //    return res;
+        //}
 
         public VoteForBill ParseVoting(string html)
         {
