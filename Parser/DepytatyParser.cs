@@ -13,16 +13,17 @@ namespace Parser
         private const int FirstOfflineDocIndex = 4;
         private const string LastParlamentsBaseUrl = @"http://w1.c1.rada.gov.ua/pls/radan_gs09/d_index_arh?skl=";
         private const string ParlamentFileTemplate = @"rada_deputies_0.txt";
+        private int _idIterator = 1;
              
         public Deputy[] ParseDeputies()
         {
             var deputies = ParseOffline(CurrentParlamentNumber);
             var uniqueDeputaties = new HashSet<Deputy>(deputies);
-            //for (int i = 1; i < FirstOfflineDocIndex; i++)
-            //{
-            //    deputies = ParseOnline(i);
-            //    MergeDeputies(uniqueDeputaties, deputies, i);
-            //}
+            for (int i = 1; i < FirstOfflineDocIndex; i++)
+            {
+                deputies = ParseOnline(i);
+                MergeDeputies(uniqueDeputaties, deputies, i);
+            }
             for (int i = FirstOfflineDocIndex; i < CurrentParlamentNumber; i++)
             {
                 deputies = ParseOffline(i);
@@ -102,6 +103,7 @@ namespace Parser
             var all = fullName.Split(' ');
             return new Deputy
             {
+                Id = _idIterator++,
                 LastName = all[0].Trim(),
                 FirstName = all[1].Trim(),
                 MiddleName = all[2].Trim(),

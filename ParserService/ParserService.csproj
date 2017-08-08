@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{C180F302-F191-45DE-9D43-BB1F133EF973}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{0c0bc483-7a37-46cb-ba4a-da5e4c32dc6f}</Project>
       <Name>Domain</Name>
