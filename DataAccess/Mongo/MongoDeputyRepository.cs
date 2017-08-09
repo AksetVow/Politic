@@ -2,6 +2,7 @@
 using Domain.DataAccess;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Mongo
 {
@@ -15,12 +16,12 @@ namespace DataAccess.Mongo
         {
             var deputy = Get(x => x.Id == item.Id).FirstOrDefault();
             if (deputy == null)
-                Add(deputy);
+                Add(item);
             else
-                Update(deputy);
+                Update(item);
         }
 
-        public Deputy[] GetMany(Func<Deputy, bool> filter)
+        public Deputy[] GetMany(Expression<Func<Deputy, bool>> filter)
         {
             return Get(filter);
         }

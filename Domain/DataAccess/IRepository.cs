@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace Domain.DataAccess
 {
@@ -6,7 +7,7 @@ namespace Domain.DataAccess
     {
         T[] GetAll();
 
-        T[] GetMany(Func<T, bool> filter);
+        T[] GetMany(Expression<Func<T, bool>> filter);
 
         bool Remove(T item);
 

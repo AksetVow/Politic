@@ -3,6 +3,7 @@ using Domain.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess
 {
@@ -28,7 +29,7 @@ namespace DataAccess
             return _dictionary.Values.ToArray();
         }
 
-        public T[] GetMany(Func<T, bool> filter)
+        public T[] GetMany(Expression<Func<T, bool>> filter)
         {
             throw new NotImplementedException();
         }

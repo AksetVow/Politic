@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using System;
 using System.Configuration;
+using System.Linq.Expressions;
 
 namespace DataAccess.Mongo
 {
@@ -34,9 +35,9 @@ namespace DataAccess.Mongo
             return result.ToArray();
         }
 
-        protected T[] Get(Func<T, bool> predicate)
+        protected T[] Get(Expression<Func<T, bool>> predicate)
         {
-            var result = AsyncHelper.RunAsync(() => _collection.Find(x => predicate(x)).ToListAsync());
+            var result = AsyncHelper.RunAsync(() => _collection.Find(predicate).ToListAsync());
 
             return result.ToArray();
         }
@@ -46,17 +47,15 @@ namespace DataAccess.Mongo
             _collection.InsertOne(item);
         }
 
-        protected bool Remove(Func<T, bool> predicate)
+        protected bool Remove(Expression<Func<T, bool>> predicate)
         {
-            var result = _collection.DeleteMany(x => predicate(x));
+            var result = _collection.DeleteMany(predicate);
             return result.DeletedCount > 0;
         }
 
-        protected void Update(T item, Func<T, bool> predicate)
+        protected void Update(T item, Expression<Func<T, bool>> predicate)
         {
-            _collection.ReplaceOne(x => predicate(x), item);
+            _collection.ReplaceOne(predicate, item);
         }
-
-
     }
 }
